@@ -6,7 +6,7 @@ services:
     #   context: .
     #   dockerfile: Dockerfile.multi
     #   target: api-build
-    image: ghcr.io/danny-avila/librechat-dev-api:latest
+    image: ghcr.io/danny-avila/librechat-dev-api:latest@sha256:dbf1f533b4e34a13c1fc5a637e7bdc8831366da22bbd36fb4ca5b46f3701a276
     container_name: librechat-api
     # ports:
     #   - 3080:3080
@@ -36,7 +36,7 @@ services:
     container_name: librechat-mongodb
     # ports:  # Uncomment this to access mongodb from outside docker, not safe in deployment
     #   - 27018:27017
-    image: mongo
+    image: mongo@sha256:5d7043a4ffe02b9ed1b6e0bab057546981af5ca0a79107e9c461e49bc44c0a7b
     restart: always
     volumes:
       - /root/data/librechat/data/data-node:/data/db
@@ -44,7 +44,7 @@ services:
 
   meilisearch:
     container_name: librechat-meilisearch
-    image: getmeili/meilisearch:v1.12.3
+    image: getmeili/meilisearch:v1.12.3@sha256:4acfcbbb9e089aa1aac838cfda3fba7f07aaaef044c23da8acbe0ab741400dac
     restart: always
     # ports: # Uncomment this to access meilisearch from outside docker
     #   - 7700:7700 # if exposing these ports, make sure your master key is not the default value
@@ -57,7 +57,7 @@ services:
       - /root/data/librechat/data/meili_data_v1.12:/meili_data
 
   vectordb:
-    image: ankane/pgvector:latest
+    image: ankane/pgvector:latest@sha256:956744bd14e9cbdf639c61c2a2a7c7c2c48a9c8cdd42f7de4ac034f4e96b90f8
     container_name: librechat-vectordb
     environment:
       POSTGRES_DB: mydatabase
@@ -69,7 +69,7 @@ services:
 
   rag_api:
     container_name: librechat-rag-api
-    image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest
+    image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest@sha256:f9f34c8ed6884b0ff9b17387e6174fed737dba29f21622ecb75604d82bc47bf8
     environment:
       - DB_HOST=vectordb
       - RAG_PORT=${RAG_PORT:-8000}
