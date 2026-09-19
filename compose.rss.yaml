@@ -1,0 +1,38 @@
+name: "RSS"
+
+services:
+  freshrss:
+    image: freshrss/freshrss@sha256:ab6b363102ccdbc39f6a62db926f567c61a5289bf25ba460f1c34423d8cc1a4d
+    container_name: freshrss
+    logging:
+      options:
+        max-size: 10m
+    volumes:
+      - /root/data/freshrss/data:/var/www/FreshRSS/data
+      - /root/data/freshrss/extensions:/var/www/FreshRSS/extensions
+    environment:
+      TZ: Europe/Paris
+      CRON_MIN: "3,33"
+    labels:
+      - com.compose.group=rss
+    restart: unless-stopped
+
+  rsshub:
+    image: diygod/rsshub@sha256:4669393ddb2ce2b998e8550a1be6c96c00151e90ebb4d11572db194e2ff29ceb
+    container_name: rsshub
+    labels:
+      - com.compose.group=rss
+    restart: unless-stopped
+    env_file:
+      - ./.env.rss
+    environment:
+      - ACCESS_KEY=${RSS_HUB_ACCESS_KEY}
+
+  rss-bridge:
+    image: rssbridge/rss-bridge@sha256:3a884925eb3001c8ff577bd4ef156d6a606ad01d36ef2daddef8c4775e943187
+    container_name: rss-bridge
+    labels:
+      - com.compose.group=rss
+    volumes:
+      - /root/data/rss-bridge:/config
+    restart: unless-stopped

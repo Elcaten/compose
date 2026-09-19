@@ -2,3 +2,4 @@ include:
   - ./compose.alt-uis.yaml
   - ./compose.bots.yaml
   - ./compose.infra.yaml
+  - ./compose.rss.yaml

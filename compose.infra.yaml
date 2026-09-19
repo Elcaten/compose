@@ -3,7 +3,7 @@ name: "Infra"
 services:
   caddy:
     build:
-      context: ./data/caddy
+      context: /root/data/caddy
     container_name: caddy
     restart: unless-stopped
     ports:
@@ -11,10 +11,10 @@ services:
       - "443:443"
       - "443:443/udp"
     volumes:
-      - ./data/caddy/Caddyfile:/etc/caddy/Caddyfile
-      - ./data/caddy/data:/data
-      - ./data/caddy/config:/config
-      - ./data/caddy/logs:/var/log/caddy
+      - /root/data/caddy/Caddyfile:/etc/caddy/Caddyfile
+      - /root/data/caddy/data:/data
+      - /root/data/caddy/config:/config
+      - /root/data/caddy/logs:/var/log/caddy
       - /root/data/caddy/cloudflare:/etc/cloudflare
 
   authelia:
@@ -24,14 +24,14 @@ services:
     depends_on:
       - redis
     volumes:
-      - ./data/authelia:/config
+      - /root/data/authelia:/config
 
   redis:
     image: redis@sha256:9d317178eceac8454a2284a9e6df2466b93c745529947f0cd42a0fa9609d7005
     restart: unless-stopped
     container_name: redis
     volumes:
-      - ./data/redis:/data
+      - /root/data/redis:/data
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 5s
@@ -43,11 +43,11 @@ services:
     container_name: borgmatic
     volumes:
       - /root:/mnt/source
-      - ./data/borgmatic/repository:/mnt/borg-repository
-      - ./data/borgmatic/borgmatic.d:/etc/borgmatic.d/
-      - ./data/borgmatic/.config/borg:/root/.config/borg
-      - ./data/borgmatic/.ssh:/root/.ssh
-      - ./data/borgmatic/.cache/borg:/root/.cache/borg
+      - /root/data/borgmatic/repository:/mnt/borg-repository
+      - /root/data/borgmatic/borgmatic.d:/etc/borgmatic.d/
+      - /root/data/borgmatic/.config/borg:/root/.config/borg
+      - /root/data/borgmatic/.ssh:/root/.ssh
+      - /root/data/borgmatic/.cache/borg:/root/.cache/borg
     environment:
       - TZ=Europe/Berlin
     restart: unless-stopped
