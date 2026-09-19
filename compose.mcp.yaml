@@ -1,0 +1,15 @@
+name: "MCP"
+
+services:
+  prowlarr-mcp:
+    image: ghcr.io/elcaten/prowlarr-mcp:latest
+    container_name: prowlarr-mcp
+    restart: unless-stopped
+    expose:
+      - "8080"
+    env_file:
+      - ./.env.mcp
+    environment:
+      FASTMCP_TRANSPORT: http
+      FASTMCP_HOST: 0.0.0.0
+      FASTMCP_PORT: "8080"

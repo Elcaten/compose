@@ -25,8 +25,6 @@ services:
     restart: unless-stopped
     env_file:
       - ./.env.rss
-    environment:
-      - ACCESS_KEY=${RSS_HUB_ACCESS_KEY}
 
   rss-bridge:
     image: rssbridge/rss-bridge@sha256:3a884925eb3001c8ff577bd4ef156d6a606ad01d36ef2daddef8c4775e943187
