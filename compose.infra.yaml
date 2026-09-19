@@ -6,6 +6,13 @@ services:
       context: /root/data/caddy
     container_name: caddy
     restart: unless-stopped
+    networks:
+      - proxy-authelia
+      - proxy-librechat
+      - proxy-redlib
+      - proxy-freshrss
+      - proxy-rsshub
+      - proxy-rss-bridge
     ports:
       - "80:80"
       - "443:443"
@@ -23,6 +30,9 @@ services:
     restart: "unless-stopped"
     depends_on:
       - redis
+    networks:
+      - proxy-authelia
+      - authelia-redis
     volumes:
       - /root/data/authelia:/config
 
@@ -30,6 +40,8 @@ services:
     image: redis@sha256:8a1efc5f479551822b47424ccae982026b633f28818eab0387348120a61e10e2
     restart: unless-stopped
     container_name: redis
+    networks:
+      - authelia-redis
     volumes:
       - /root/data/redis:/data
     healthcheck:
@@ -41,6 +53,8 @@ services:
   borgmatic:
     image: ghcr.io/borgmatic-collective/borgmatic@sha256:f57f5ce0af50819024a9a57bc54904260118a6481c650e26c985b63138d3ba29
     container_name: borgmatic
+    networks:
+      - borgmatic-egress
     volumes:
       - /root:/mnt/source
       - /root/data/borgmatic/repository:/mnt/borg-repository
@@ -50,4 +64,7 @@ services:
       - /root/data/borgmatic/.cache/borg:/root/.cache/borg
     environment:
       - TZ=Europe/Berlin
+      # Keep lock ownership stable when this container is recreated.
+      - BORG_HOST_ID=03bc3da3-b785-4e59-9066-4790c4e9a896
+    stop_grace_period: 1m
     restart: unless-stopped

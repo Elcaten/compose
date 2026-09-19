@@ -5,3 +5,35 @@ include:
   - ./compose.librechat.yaml
   - ./compose.mcp.yaml
   - ./compose.rss.yaml
+
+# All included services declare their networks explicitly. Keep these definitions
+# here so cross-file links have one owner; deploy using this root Compose file.
+networks:
+  # One network per proxied application: apps cannot reach one another directly.
+  proxy-authelia: {}
+  proxy-librechat: {}
+  proxy-redlib: {}
+  proxy-freshrss: {}
+  proxy-rsshub: {}
+  proxy-rss-bridge: {}
+
+  # Each backend link contains only the server and its required client.
+  authelia-redis:
+    internal: true
+  librechat-mongodb:
+    internal: true
+  librechat-meilisearch:
+    internal: true
+  librechat-rag:
+    internal: true
+  rag-vectordb:
+    internal: true
+
+  # MCP requires outbound access to its external Prowlarr server.
+  librechat-prowlarr: {}
+
+  # Private outbound networks; never combine these into a shared egress network.
+  rag-egress: {}
+  preview-bot-egress: {}
+  borgmatic-egress: {}
+  isponsorblocktv-egress: {}

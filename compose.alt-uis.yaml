@@ -4,6 +4,8 @@ services:
   redlib:
     image: ghcr.io/cycneuramus/containers:redlib@sha256:4b607fd58f2c170d9bbf073bfedbe570c5b6f29c7e72b3a2285e86d5c7f98af9
     container_name: redlib
+    networks:
+      - proxy-redlib
     restart: unless-stopped
     healthcheck:
       disable: true
@@ -13,6 +15,8 @@ services:
 
   iSponsorBlockTV:
     container_name: iSponsorBlockTV
+    networks:
+      - isponsorblocktv-egress
     image: ghcr.io/dmunozv04/isponsorblocktv@sha256:d1e876636754fb2b54490feebe3af4a321f7f2a932a2d57b67b2a667eea40823
     restart: unless-stopped
     volumes:

@@ -4,6 +4,8 @@ services:
   prowlarr-mcp:
     image: ghcr.io/elcaten/prowlarr-mcp:latest@sha256:32eeaa0d56cb811abc77008a2dcacc2f1e48db2309bde9997385a0c5b8a1aa79
     container_name: prowlarr-mcp
+    networks:
+      - librechat-prowlarr
     restart: unless-stopped
     expose:
       - "8080"
