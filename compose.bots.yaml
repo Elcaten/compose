@@ -1,0 +1,11 @@
+name: "Bots"
+
+services:
+  preview-bot:
+    image: ghcr.io/elcaten/preview-bot:${IMAGE_TAG:-edge}
+    container_name: preview-bot
+    restart: unless-stopped
+    env_file:
+      - .env.bots
+    volumes:
+      - /root/data/preview-bot/share:/share
