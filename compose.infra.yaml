@@ -19,7 +19,7 @@ services:
 
   authelia:
     container_name: authelia
-    image: docker.io/authelia/authelia:4.39.4@sha256:64b356c30fd817817a4baafb4dbc0f9f8702e46b49e1edb92ff42e19e487b517
+    image: docker.io/authelia/authelia:4.39.28@sha256:bd97cff4fcbf715b5ff1f9ae286afbe6033afce385302520b0368122d43a6f54
     restart: "unless-stopped"
     depends_on:
       - redis
