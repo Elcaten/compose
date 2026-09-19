@@ -2,7 +2,7 @@ name: "RSS"
 
 services:
   freshrss:
-    image: freshrss/freshrss@sha256:ab6b363102ccdbc39f6a62db926f567c61a5289bf25ba460f1c34423d8cc1a4d
+    image: freshrss/freshrss@sha256:258b8edfc8a76a61f60d2d6a14d8f8d12495d78abf38646a2137612dfa264a21
     container_name: freshrss
     logging:
       options:
@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
 
   rsshub:
-    image: diygod/rsshub@sha256:4669393ddb2ce2b998e8550a1be6c96c00151e90ebb4d11572db194e2ff29ceb
+    image: diygod/rsshub@sha256:22845ada2f14519540e9794f2967f92a2dffe67dbee67c0e6c2572dbb866bc2b
     container_name: rsshub
     labels:
       - com.compose.group=rss
@@ -29,7 +29,7 @@ services:
       - ACCESS_KEY=${RSS_HUB_ACCESS_KEY}
 
   rss-bridge:
-    image: rssbridge/rss-bridge@sha256:3a884925eb3001c8ff577bd4ef156d6a606ad01d36ef2daddef8c4775e943187
+    image: rssbridge/rss-bridge@sha256:606896116558c57e3d381dec6874457f7a69216103d77c78b5bd38b92b251902
     container_name: rss-bridge
     labels:
       - com.compose.group=rss
