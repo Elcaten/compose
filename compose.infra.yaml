@@ -56,15 +56,19 @@ services:
     networks:
       - borgmatic-egress
     volumes:
-      - /root:/mnt/source
-      - /root/data/borgmatic/repository:/mnt/borg-repository
-      - /root/data/borgmatic/borgmatic.d:/etc/borgmatic.d/
+      - /root/data:/mnt/source/data:ro
+      - /root/data/borgmatic/borgmatic.d:/etc/borgmatic.d:ro
       - /root/data/borgmatic/.config/borg:/root/.config/borg
-      - /root/data/borgmatic/.ssh:/root/.ssh
+      - /root/data/borgmatic/.ssh:/root/.ssh:ro
       - /root/data/borgmatic/.cache/borg:/root/.cache/borg
+      - /root/data/borgmatic/.local/state/borgmatic:/root/.local/state/borgmatic
+    tmpfs:
+      - /run/borgmatic-runtime:mode=0700
     environment:
       - TZ=Europe/Berlin
       # Keep lock ownership stable when this container is recreated.
       - BORG_HOST_ID=03bc3da3-b785-4e59-9066-4790c4e9a896
+      # Use a stable neutral name in archive names and metadata.
+      - BORG_HOSTNAME=backup-client-03bc3da3
     stop_grace_period: 1m
     restart: unless-stopped
