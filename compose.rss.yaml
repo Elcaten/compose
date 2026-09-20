@@ -12,31 +12,20 @@ services:
     volumes:
       - /root/data/freshrss/data:/var/www/FreshRSS/data
       - /root/data/freshrss/extensions:/var/www/FreshRSS/extensions
+    env_file:
+      - ./.env.rss
     environment:
       TZ: Europe/Paris
       CRON_MIN: "3,33"
-    labels:
-      - com.compose.group=rss
     restart: unless-stopped
-
-  rsshub:
-    image: diygod/rsshub@sha256:22845ada2f14519540e9794f2967f92a2dffe67dbee67c0e6c2572dbb866bc2b
-    container_name: rsshub
-    networks:
-      - proxy-rsshub
-    labels:
-      - com.compose.group=rss
-    restart: unless-stopped
-    env_file:
-      - ./.env.rss
 
   rss-bridge:
     image: rssbridge/rss-bridge@sha256:606896116558c57e3d381dec6874457f7a69216103d77c78b5bd38b92b251902
     container_name: rss-bridge
     networks:
       - proxy-rss-bridge
-    labels:
-      - com.compose.group=rss
     volumes:
       - /root/data/rss-bridge:/config
+    env_file:
+      - ./.env.rss
     restart: unless-stopped
