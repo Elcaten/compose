@@ -11,7 +11,6 @@ services:
       - proxy-librechat
       - proxy-redlib
       - proxy-freshrss
-      - proxy-rss-bridge
     ports:
       - "80:80"
       - "443:443"

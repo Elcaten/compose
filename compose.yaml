@@ -14,9 +14,10 @@ networks:
   proxy-librechat: {}
   proxy-redlib: {}
   proxy-freshrss: {}
-  proxy-rss-bridge: {}
 
   # Each backend link contains only the server and its required client.
+  freshrss-rss-bridge:
+    internal: true
   authelia-redis:
     internal: true
   librechat-mongodb:
@@ -36,3 +37,4 @@ networks:
   preview-bot-egress: {}
   borgmatic-egress: {}
   isponsorblocktv-egress: {}
+  rss-bridge-egress: {}
