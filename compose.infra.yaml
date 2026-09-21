@@ -4,6 +4,8 @@ services:
   caddy:
     build:
       context: /root/data/caddy
+    env_file:
+      - ./.env.caddy
     container_name: caddy
     restart: unless-stopped
     networks:

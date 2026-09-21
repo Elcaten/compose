@@ -15,3 +15,16 @@ services:
       FASTMCP_TRANSPORT: http
       FASTMCP_HOST: 0.0.0.0
       FASTMCP_PORT: "8080"
+
+  wolt-mcp:
+    image: ghcr.io/elcaten/wolt-mcp:sha-fc18bc3
+    container_name: wolt-mcp
+    networks:
+      - librechat-wolt
+    restart: unless-stopped
+    expose:
+      - "8080"
+    env_file:
+      - ./.env.mcp
+    volumes:
+      - /root/data/wolt-mcp:/data:rw

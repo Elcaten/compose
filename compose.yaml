@@ -29,8 +29,9 @@ networks:
   rag-vectordb:
     internal: true
 
-  # MCP requires outbound access to its external Prowlarr server.
+  # MCPs requires outbound access to its external Prowlarr server.
   librechat-prowlarr: {}
+  librechat-wolt: {}
 
   # Private outbound networks; never combine these into a shared egress network.
   rag-egress: {}
