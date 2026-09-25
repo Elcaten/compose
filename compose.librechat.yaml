@@ -6,7 +6,7 @@ services:
     #   context: .
     #   dockerfile: Dockerfile.multi
     #   target: api-build
-    image: ghcr.io/danny-avila/librechat-dev-api:latest@sha256:dbf1f533b4e34a13c1fc5a637e7bdc8831366da22bbd36fb4ca5b46f3701a276
+    image: ghcr.io/danny-avila/librechat-dev-api:latest@sha256:dee4315fff7536abf58caa1081b44dd9381d6f30740848d54d98224eb8d2987a
     container_name: librechat-api
     networks:
       - proxy-librechat
@@ -85,7 +85,7 @@ services:
       - librechat-rag
       - rag-vectordb
       - rag-egress
-    image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest@sha256:f9f34c8ed6884b0ff9b17387e6174fed737dba29f21622ecb75604d82bc47bf8
+    image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest@sha256:a62ce2221b43a9bb57fa6cb733e7047c80132960272c33d5704028f3071a1251
     environment:
       - DB_HOST=vectordb
       - RAG_PORT=${RAG_PORT:-8000}
