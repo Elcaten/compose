@@ -6,6 +6,12 @@
       "matchManagers": ["docker-compose"],
       "matchUpdateTypes": ["digest"],
       "groupName": "container image digests"
+    },
+    {
+      "description": "Use version tags without digest pins for the LibreChat stack",
+      "matchManagers": ["docker-compose"],
+      "matchFileNames": ["compose.librechat.yaml"],
+      "pinDigests": false
     }
   ]
 }

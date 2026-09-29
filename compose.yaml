@@ -3,8 +3,15 @@ include:
   - ./compose.bots.yaml
   - ./compose.infra.yaml
   - ./compose.librechat.yaml
-  - ./compose.mcp.yaml
   - ./compose.rss.yaml
+
+services:
+  world-of-warships:
+    container_name: world-of-warships
+    networks:
+      - proxy-world-of-warships
+    image: ghcr.io/elcaten/world-of-warships:latest
+    restart: unless-stopped
 
 # All included services declare their networks explicitly. Keep these definitions
 # here so cross-file links have one owner; deploy using this root Compose file.
@@ -14,6 +21,7 @@ networks:
   proxy-librechat: {}
   proxy-redlib: {}
   proxy-freshrss: {}
+  proxy-world-of-warships: {}
 
   # Each backend link contains only the server and its required client.
   freshrss-rss-bridge:

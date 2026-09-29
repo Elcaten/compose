@@ -6,7 +6,7 @@ services:
     #   context: .
     #   dockerfile: Dockerfile.multi
     #   target: api-build
-    image: ghcr.io/danny-avila/librechat-dev-api:latest@sha256:dbf1f533b4e34a13c1fc5a637e7bdc8831366da22bbd36fb4ca5b46f3701a276
+    image: ghcr.io/danny-avila/librechat-api:v0.8.8-rc3
     container_name: librechat-api
     networks:
       - proxy-librechat
@@ -45,7 +45,7 @@ services:
       - librechat-mongodb
     # ports:  # Uncomment this to access mongodb from outside docker, not safe in deployment
     #   - 27018:27017
-    image: mongo@sha256:5d7043a4ffe02b9ed1b6e0bab057546981af5ca0a79107e9c461e49bc44c0a7b
+    image: mongo:8.3.11-noble
     restart: always
     volumes:
       - /root/data/librechat/data/data-node:/data/db
@@ -55,7 +55,7 @@ services:
     container_name: librechat-meilisearch
     networks:
       - librechat-meilisearch
-    image: getmeili/meilisearch:v1.53.2@sha256:c94e58ca09662dd6e65e8f1b0fd145767be3da7d5422a863a27b8d2b68e090c9
+    image: getmeili/meilisearch:v1.35.1
     restart: always
     # ports: # Uncomment this to access meilisearch from outside docker
     #   - 7700:7700 # if exposing these ports, make sure your master key is not the default value
@@ -65,10 +65,11 @@ services:
       - MEILI_HOST=http://meilisearch:7700
       - MEILI_NO_ANALYTICS=true
     volumes:
-      - /root/data/librechat/data/meili_data_v1.12:/meili_data
+      # Keep the directory version aligned with the image; upgrades require a new directory and reindex.
+      - /root/data/librechat/data/meili_data_v1.35.1:/meili_data
 
   vectordb:
-    image: ankane/pgvector:latest@sha256:956744bd14e9cbdf639c61c2a2a7c7c2c48a9c8cdd42f7de4ac034f4e96b90f8
+    image: ankane/pgvector:v0.5.1
     container_name: librechat-vectordb
     networks:
       - rag-vectordb
@@ -86,7 +87,7 @@ services:
       - librechat-rag
       - rag-vectordb
       - rag-egress
-    image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:latest@sha256:f9f34c8ed6884b0ff9b17387e6174fed737dba29f21622ecb75604d82bc47bf8
+    image: ghcr.io/danny-avila/librechat-rag-api-dev-lite:v0.9.0
     environment:
       - DB_HOST=vectordb
       - RAG_PORT=${RAG_PORT:-8000}
