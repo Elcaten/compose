@@ -45,7 +45,7 @@ services:
       - librechat-mongodb
     # ports:  # Uncomment this to access mongodb from outside docker, not safe in deployment
     #   - 27018:27017
-    image: mongo:8.3.11-noble
+    image: mongo:9.0.2-noble
     restart: always
     volumes:
       - /root/data/librechat/data/data-node:/data/db
