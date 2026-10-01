@@ -55,7 +55,7 @@ services:
     container_name: librechat-meilisearch
     networks:
       - librechat-meilisearch
-    image: getmeili/meilisearch:v1.35.1
+    image: getmeili/meilisearch:v1.54.3
     restart: always
     # ports: # Uncomment this to access meilisearch from outside docker
     #   - 7700:7700 # if exposing these ports, make sure your master key is not the default value
