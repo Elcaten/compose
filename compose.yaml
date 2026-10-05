@@ -10,7 +10,7 @@ services:
     container_name: world-of-warships
     networks:
       - proxy-world-of-warships
-    image: ghcr.io/elcaten/world-of-warships:latest@sha256:ad0678bf4f22aa53631ed018240ff11a39130aeed15564fdd1126beff8cc120c
+    image: ghcr.io/elcaten/world-of-warships:latest@sha256:cd9e060721fa35002682b7c6cbfa0e2226bb62c86e8c948c6e1dedef2282a310
     restart: unless-stopped
 
 # All included services declare their networks explicitly. Keep these definitions
