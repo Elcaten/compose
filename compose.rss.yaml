@@ -2,7 +2,7 @@ name: "RSS"
 
 services:
   freshrss:
-    image: freshrss/freshrss@sha256:258b8edfc8a76a61f60d2d6a14d8f8d12495d78abf38646a2137612dfa264a21
+    image: freshrss/freshrss@sha256:48b63b9bc3d042a1301c32971b01af8841c7f059b452589c5bf77f475ba44c61
     container_name: freshrss
     networks:
       - proxy-freshrss
@@ -22,7 +22,7 @@ services:
     restart: unless-stopped
 
   rss-bridge:
-    image: rssbridge/rss-bridge@sha256:8e84691e08d20120fb1bf3f563dd6395632f02932ff29a0cfd20133c0004ee05
+    image: rssbridge/rss-bridge@sha256:7317b773afdc701287436c870806f9191f4e78c89fe38955d0dd49d1f847a355
     container_name: rss-bridge
     networks:
       - freshrss-rss-bridge
