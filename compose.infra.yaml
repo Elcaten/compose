@@ -13,6 +13,7 @@ services:
       - proxy-librechat
       - proxy-redlib
       - proxy-freshrss
+      - proxy-rsshub
       - proxy-world-of-warships
       - proxy-social-preview
     ports:

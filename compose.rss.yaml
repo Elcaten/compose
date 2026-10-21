@@ -6,29 +6,22 @@ services:
     container_name: freshrss
     networks:
       - proxy-freshrss
-      - freshrss-rss-bridge
     logging:
       options:
         max-size: 10m
     volumes:
       - /root/data/freshrss/data:/var/www/FreshRSS/data
       - /root/data/freshrss/extensions:/var/www/FreshRSS/extensions
-    env_file:
-      - ./.env.rss
     environment:
       TZ: Europe/Paris
       CRON_MIN: "3,33"
-      INTERNAL_HOST_ALLOWLIST: "rss-bridge:80"
     restart: unless-stopped
 
-  rss-bridge:
-    image: rssbridge/rss-bridge@sha256:fcd6ac6335ef0e4f4688b41244e925735195bd41df70808d27d891910f2c0be8
-    container_name: rss-bridge
+  rsshub:
+    image: diygod/rsshub:latest
+    container_name: rsshub
     networks:
-      - freshrss-rss-bridge
-      - rss-bridge-egress
-    volumes:
-      - /root/data/rss-bridge:/config
+      - proxy-rsshub
+    restart: unless-stopped
     env_file:
       - ./.env.rss
-    restart: unless-stopped
