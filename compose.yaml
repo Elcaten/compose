@@ -22,6 +22,7 @@ networks:
   proxy-redlib: {}
   proxy-freshrss: {}
   proxy-world-of-warships: {}
+  proxy-social-preview: {}
 
   # Each backend link contains only the server and its required client.
   freshrss-rss-bridge:
