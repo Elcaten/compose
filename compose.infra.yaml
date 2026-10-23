@@ -40,7 +40,7 @@ services:
       - /root/data/authelia:/config
 
   redis:
-    image: redis@sha256:5c02d7c0f8d75af45958c0294a8004f2e14b42df98a1103e3a669aa7ec787be6
+    image: redis@sha256:97ec88159e6d7cfb5ddef9015386087d58a912de80112f06ebdfa78fa5989901
     restart: unless-stopped
     container_name: redis
     networks:
@@ -54,7 +54,7 @@ services:
       retries: 5
 
   borgmatic:
-    image: ghcr.io/borgmatic-collective/borgmatic@sha256:78a349f6cf4e3fdc0cd05a3bf884331e77446add7d4ee4ceb46e340c4f7ce55e
+    image: ghcr.io/borgmatic-collective/borgmatic@sha256:d11d86d433d60a410ecbd54c186ca136d0400d20bab5c0defe941e87c7439b54
     container_name: borgmatic
     networks:
       - borgmatic-egress
