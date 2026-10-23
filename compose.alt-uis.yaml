@@ -14,7 +14,7 @@ services:
       - /root/data/social-preview/downloads:/rails/storage/media
 
   redlib:
-    image: ghcr.io/cycneuramus/containers:redlib@sha256:4b607fd58f2c170d9bbf073bfedbe570c5b6f29c7e72b3a2285e86d5c7f98af9
+    image: quay.io/redlib/redlib:latest
     container_name: redlib
     networks:
       - proxy-redlib
