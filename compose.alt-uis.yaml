@@ -14,7 +14,7 @@ services:
       - /root/data/social-preview/downloads:/rails/storage/media
 
   redlib:
-    image: quay.io/redlib/redlib:latest
+    image: quay.io/redlib/redlib:latest@sha256:37f624d87ce6cdd90d945af3688fdf0c195a0251d3b5ba62047792e8be2390df
     container_name: redlib
     networks:
       - proxy-redlib
