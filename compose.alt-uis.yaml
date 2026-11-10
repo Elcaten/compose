@@ -13,18 +13,6 @@ services:
       - /root/data/social-preview/data:/rails/storage
       - /root/data/social-preview/downloads:/rails/storage/media
 
-  redlib:
-    image: quay.io/redlib/redlib:latest
-    container_name: redlib
-    networks:
-      - proxy-redlib
-    restart: unless-stopped
-    healthcheck:
-      disable: true
-    environment:
-      - REDLIB_DEFAULT_USE_HLS=on
-      - REDLIB_DEFAULT_SHOW_NSFW=on
-
   iSponsorBlockTV:
     container_name: iSponsorBlockTV
     networks:
