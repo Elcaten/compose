@@ -4,43 +4,36 @@ include:
   - ./compose.rss.yaml
 
 services:
-  world-of-warships:
-    container_name: world-of-warships
-    networks:
-      - proxy-world-of-warships
-    image: ghcr.io/elcaten/world-of-warships:latest@sha256:cd9e060721fa35002682b7c6cbfa0e2226bb62c86e8c948c6e1dedef2282a310
-    restart: unless-stopped
 
 # All included services declare their networks explicitly. Keep these definitions
 # here so cross-file links have one owner; deploy using this root Compose file.
 networks:
   # One network per proxied application: apps cannot reach one another directly.
   proxy-authelia: {}
-  proxy-librechat: {}
+  # proxy-librechat: {}
   proxy-redlib: {}
   proxy-freshrss: {}
-  proxy-world-of-warships: {}
   proxy-social-preview: {}
   proxy-rsshub: {}
 
   # Each backend link contains only the server and its required client.
   authelia-redis:
     internal: true
-  librechat-mongodb:
-    internal: true
-  librechat-meilisearch:
-    internal: true
-  librechat-rag:
-    internal: true
-  rag-vectordb:
-    internal: true
+  # librechat-mongodb:
+  #   internal: true
+  # librechat-meilisearch:
+  #   internal: true
+  # librechat-rag:
+  #   internal: true
+  # rag-vectordb:
+  #   internal: true
 
   # MCPs requires outbound access to its external Prowlarr server.
-  librechat-prowlarr: {}
-  librechat-wolt: {}
+  # librechat-prowlarr: {}
+  # librechat-wolt: {}
 
   # Private outbound networks; never combine these into a shared egress network.
-  rag-egress: {}
+  # rag-egress: {}
   preview-bot-egress: {}
   borgmatic-egress: {}
   isponsorblocktv-egress: {}
