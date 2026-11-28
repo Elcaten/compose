@@ -18,7 +18,7 @@ services:
     restart: unless-stopped
 
   rsshub:
-    image: diygod/rsshub:latest@sha256:6be6b4b01d9af2fefe77eecf881b8dd0eb980dcffbae8e6881bcd19a13d72af3
+    image: diygod/rsshub:latest@sha256:3f9a247f78c56eceb286d3acfcde1757342490c9205a76d41c533d51fdd278ce
     container_name: rsshub
     networks:
       - proxy-rsshub
